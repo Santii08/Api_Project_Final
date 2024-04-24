@@ -1,0 +1,15 @@
+{
+  "name": "api_project_final",
+  "version": "1.0.0",
+  "description": "In this api, we will have the base for the project, each endpoint is gonna be here.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
