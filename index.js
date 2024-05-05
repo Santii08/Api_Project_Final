@@ -3,12 +3,19 @@ const cors = require("cors");
 const app = express();
 const mongoose = require("mongoose");
 
+const corsConfig = {
+  origin: "*",
+  credential: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+};
+
 require("dotenv").config();
 
 const PORT = 8080;
 
 app.use(express.json());
-app.use(cors());
+app.options("", cors(corsConfig));
+app.use(cors(corsConfig));
 
 // Corrección en las rutas de los módulos
 app.use("/api/signup", require("./routes/signup"));
