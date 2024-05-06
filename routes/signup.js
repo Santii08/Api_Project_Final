@@ -4,11 +4,11 @@ const router = express.Router();
 
 // Middleware para la ruta '/api/signup'
 router.post("/", (req, res) => {
-  const { username, name, password } = req.body;
-  if (!!username || !!name || !!password) {
+  const { name, birthday, mail, username, password } = req.body;
+  if (!!!name || !!!birthday || !!!mail || !!!username || !!!password) {
     return res.status(400).json(
       jsonResponse(400, {
-        errror: "Necesitas completar todo",
+        error: "Necesitas completar todo",
       })
     );
   }
