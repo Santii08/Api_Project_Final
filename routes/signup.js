@@ -15,6 +15,7 @@ router.post("/", (req, res) => {
   res
     .status(200)
     .json(jsonResponse(200, { message: "Usario creado correctamente" }));
+  res.send("signout");
 });
 
 module.exports = router;
