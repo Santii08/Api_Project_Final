@@ -14,7 +14,6 @@ require("dotenv").config();
 const PORT = 8080;
 
 app.use(express.json());
-app.options("", cors(corsConfig));
 app.use(cors(corsConfig));
 
 // Corrección en las rutas de los módulos
