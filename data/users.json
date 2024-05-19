@@ -5,5 +5,19 @@
     "email": "dan.santiago.rc2005@gmail.com",
     "username": "Daniel",
     "password": "Danielito"
+  },
+  {
+    "name": "Daniel",
+    "birthday": "2024-05-13",
+    "email": "admin@admin.com",
+    "username": "1234",
+    "password": "1234"
+  },
+  {
+    "name": "ccZx",
+    "birthday": "2024-05-08",
+    "email": "asdasd@dd.sada",
+    "username": "admin",
+    "password": "admin"
   }
 ]

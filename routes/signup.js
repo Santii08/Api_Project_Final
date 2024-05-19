@@ -3,6 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const { jsonResponse } = require("../lib/jsonResponse");
 const router = express.Router();
+const verificacion = require("../Verifiacion");
 
 // Ruta del directorio y archivo JSON donde se guardarán los usuarios
 const dataDirectory = "../data";
@@ -44,7 +45,7 @@ function guardarUsuario(usuario) {
 }
 
 // Middleware para la ruta '/api/signup'
-router.post("/", (req, res) => {
+router.post("/", verificacion, (req, res) => {
   const { name, birthday, email, username, password } = req.body;
   if (!name || !birthday || !email || !username || !password) {
     return res.status(400).json(
