@@ -6,8 +6,11 @@ const keys = require("../Settings/Keys"); // Importa la clave secreta
 const { jsonResponse } = require("../lib/jsonResponse");
 const router = express.Router();
 
+const {db}= require("../firebase")
+
 // Ruta del archivo JSON donde se guardan los usuarios
-const usersFilePath = path.join(__dirname, "..", "data", "users.json");
+/*
+const usersFilePath = path.join(__dirname, "..", "data", "users.json");*/
 
 // Middleware para la ruta '/api/login'
 router.post("/", (req, res) => {
@@ -19,7 +22,7 @@ router.post("/", (req, res) => {
       })
     );
   }
-
+/*
   // Lee el contenido actual del archivo JSON
   let usuarios = [];
   try {
@@ -33,7 +36,7 @@ router.post("/", (req, res) => {
       })
     );
   }
-
+ 
   // Busca el usuario en la lista de usuarios
   const usuarioEncontrado = usuarios.find(
     (user) => user.username === username && user.password === password
@@ -47,7 +50,7 @@ router.post("/", (req, res) => {
       })
     );
   }
-
+ */
   // Si el usuario se encuentra, crear el token
   const payload = {
     check: true,
