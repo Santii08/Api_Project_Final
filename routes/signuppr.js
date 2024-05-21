@@ -13,10 +13,10 @@ router.post("/", async (req, res) => {
   }
   await db.collection("contacts").add({
     name,
-    birthday,
-    email,
     username,
     password,
+    birthday,
+    email,
   });
   res.status(200).json({
     message: "Nuevo usuario creado correctamente",
