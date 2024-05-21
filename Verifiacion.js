@@ -1,4 +1,3 @@
-// middlewares/verificacion.js
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const keys = require("./Settings/Keys");
@@ -20,11 +19,11 @@ verificacion.use((req, res, next) => {
 
   jwt.verify(tokenWithoutBearer, keys.key, (error, decoded) => {
     if (error) {
-      return res.json({
+      return res.status(403).send({
         message: "Token no válido",
       });
     } else {
-      req.decoded = decoded;
+      req.user = decoded; // Cambia req.decoded a req.user
       next();
     }
   });
