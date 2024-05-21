@@ -28,11 +28,13 @@ router.post("/", async (req, res) => {
 
     const userData = querySnapshot.docs.map((doc) => doc.data());
     const user = userData[0];
+    const email = userData[0];
     const userId = querySnapshot.docs[0].id;
 
     const payload = {
       check: true,
       username: user.username,
+      email: user.email,
       userId: userId,
     };
 
