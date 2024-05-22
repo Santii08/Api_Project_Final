@@ -1,34 +1,51 @@
 const express = require("express");
-const verificacion = require("../Verifiacion");
+const verificacion = require("../Verifiacion"); // Asegúrate de que esta ruta es correcta
 const router = express.Router();
-const admin = require("firebase-admin");
 const { db } = require("../firebase"); // Asegúrate de que esta ruta es correcta
 
-// Middleware para la ruta '/api/signup'
-router.get("/tweets/:userId", verificacion, async (req, res) => {
-  try {
-    const userId = req.params.userId;
+// Ruta para obtener tweets de un usuario específico basado en su ID
+router.get("/:userId", verificacion, async (req, res) => {
+  const { userId } = req.params; // Captura el userId de los parámetros de la ruta
 
-    // Consulta en la base de datos para obtener los tweets del usuario
+  if (!userId) {
+    return res.status(400).send("User ID is required");
+  }
+
+  try {
+    // Obtener todos los tweets del usuario especificado
     const tweetsSnapshot = await db
       .collection("tweets")
       .where("userId", "==", userId)
       .get();
     const tweets = [];
 
-    tweetsSnapshot.forEach((doc) => {
+    for (const doc of tweetsSnapshot.docs) {
       const tweetData = doc.data();
-      tweets.push({
-        id: doc.id,
-        username: tweetData.username,
-        text: tweetData.text,
-        likes: tweetData.likes || 0, // Puedes ajustar esto según la estructura real de tus tweets
-      });
-    });
+
+      // Obtener detalles del usuario
+      const userSnapshot = await db.collection("contacts").doc(userId).get();
+      if (userSnapshot.exists) {
+        const userData = userSnapshot.data();
+        const username = userData.username;
+
+        // Añadir los detalles del usuario al tweet
+        tweets.push({
+          id: doc.id,
+          ...tweetData,
+          username: username,
+        });
+      } else {
+        tweets.push({
+          id: doc.id,
+          ...tweetData,
+          username: null,
+        });
+      }
+    }
 
     res.status(200).json(tweets);
   } catch (error) {
-    console.error("Error fetching tweets by user ID: ", error);
+    console.error("Error fetching tweets and user details: ", error);
     res.status(500).send("Internal Server Error");
   }
 });

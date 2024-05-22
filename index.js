@@ -32,7 +32,9 @@ app.use("/api/home", require("./routes/home"));
 app.use("/api/info", require("./routes/Getinfo"));
 app.use("/api/tweet", require("./routes/GetTweet"));
 app.use("/api/like", require("./routes/likes"));
-
+app.use("/api/profile", require("./routes/tweetsperfil"));
+app.use("/api/edit", require("./routes/editTweet"));
+app.use("/api/topic", require("./routes/buscarTopics"));
 
 app.get("/inicio", (req, res) => {
   const name = "Daniel Santiago";

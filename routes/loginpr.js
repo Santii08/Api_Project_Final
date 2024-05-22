@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
       .get();
 
     if (querySnapshot.empty) {
-      return res.status(404).send({ error: "No matching documents found" });
+      return res.status(404).send({ error: "Username or password incorrect" });
     }
 
     const userData = querySnapshot.docs.map((doc) => doc.data());
@@ -44,6 +44,7 @@ router.post("/", async (req, res) => {
       message: "User authenticated successfully",
       token: token,
       user: user,
+      userId: userId,
     });
   } catch (error) {
     res

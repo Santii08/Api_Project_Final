@@ -5,14 +5,17 @@ const { db } = require("../firebase");
 
 // Middleware para la ruta '/api/signup'
 router.post("/", verificacion, async (req, res) => {
-  const { tweet } = req.body; // Obtener parámetros del cuerpo de la solicitud
-  const { hashtag } = req.body;
-  const { topic } = req.body;
-
+  const { tweet, hashtag, topic } = req.body; // Obtener parámetros del cuerpo de la solicitud
   const userId = req.user.userId; //capturo el id del usuario
 
+  // Validar que el campo "topic" esté presente en la solicitud
+  if (!topic) {
+    return res.status(400).json({ error: "El campo 'topic' es obligatorio" });
+  }
+
+  // Validar que el campo "tweet" esté presente en la solicitud
   if (!tweet) {
-    return res.status(400).send({ error: "Completa el Tweet" });
+    return res.status(400).json({ error: "El campo 'tweet' es obligatorio" });
   }
 
   try {
@@ -33,8 +36,9 @@ router.post("/", verificacion, async (req, res) => {
     res.status(200).json(response);
   } catch (error) {
     console.error("Error al agregar el tweet:", error);
-    res.status(500).send({ error: "Error al agregar el tweet" });
+    res.status(500).json({ error: "Error al agregar el tweet" });
   }
 });
 
 module.exports = router;
+
