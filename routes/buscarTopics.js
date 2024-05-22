@@ -4,7 +4,7 @@ const router = express.Router();
 const { db } = require("../firebase");
 
 // Middleware para la ruta '/api/signup'
-router.get("/:topic", async (req, res) => {
+router.get("/:topic", verificacion,async (req, res) => {
   const { topic } = req.params;
 
   try {
