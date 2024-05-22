@@ -8,6 +8,7 @@ router.post("/", verificacion, async (req, res) => {
   const { tweet } = req.body; // Obtener parámetros del cuerpo de la solicitud
   const { hashtag } = req.body;
   const { topic } = req.body;
+
   const userId = req.user.userId; //capturo el id del usuario
 
   if (!tweet) {
