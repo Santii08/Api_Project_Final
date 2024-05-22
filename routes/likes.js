@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { db } = require("../firebase");
 const verificacion = require("../Verifiacion");
+const admin = require("firebase-admin");
 
 // Middleware para la ruta '/api/like'
 router.post("/", verificacion, async (req, res) => {
@@ -45,6 +46,7 @@ router.post("/", verificacion, async (req, res) => {
     const response = {
       message: "Like agregado exitosamente al tweet",
       tweetId,
+      likes: currentLikes, // Agregar el número de likes a la respuesta
     };
 
     res.status(200).json(response);
