@@ -24,10 +24,12 @@ app.use("/api/refreshToken", require("./routes/refreshToken"));
 app.use("/api/logout", require("./routes/logout"));
 app.use("/api/todos", require("./routes/todos"));
 app.use("/api/user", require("./routes/user"));
-app.use("/api/home", require("./routes/home"));
+app.use("/api/create", require("./routes/crearTweet"));
 app.use("/api/loginpr", require("./routes/loginpr"));
 app.use("/api/signuppr", require("./routes/signuppr"));
 app.use("/api/data", require("./routes/configuracionData"));
+app.use("/api/home", require("./routes/home"));
+app.use("/api/info", require("./routes/Getinfo"));
 
 app.get("/inicio", (req, res) => {
   const name = "Daniel Santiago";
